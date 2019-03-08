@@ -42,18 +42,18 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            DoubleCounterScreen(
-              counter: _counter,
-              incrementFunction: increment,
-              decrementFunction: decrement,
-            ),
             LoginStateButton(
                 loginState: _loginState,
                 changeLoginState: (LoginState newLoginState) {
                   _loginState = newLoginState;
                   setState(() {});
                 }),
-            CheckStatusButton(currentLoginState: _loginState)
+            DoubleCounterScreen(
+              counter: _counter,
+              incrementFunction: increment,
+              decrementFunction: decrement,
+            ),
+            CheckStatusButton(currentLoginState: _loginState),
           ],
         ),
       ),
