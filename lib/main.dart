@@ -42,20 +42,42 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
+            DoubleCounterScreen(
+              counter: _counter,
+              incrementFunction: increment,
+              decrementFunction: decrement,
+            ),
             LoginStateButton(
                 loginState: _loginState,
                 changeLoginState: (LoginState newLoginState) {
                   _loginState = newLoginState;
                   setState(() {});
                 }),
-            DoubleCounterScreen(
-              counter: _counter,
-              incrementFunction: increment,
-              decrementFunction: decrement,
-            ),
+            CheckStatusButton(currentLoginState: _loginState)
           ],
         ),
       ),
+    );
+  }
+}
+
+class CheckStatusButton extends StatelessWidget {
+  final LoginState currentLoginState;
+
+  const CheckStatusButton({Key key, @required this.currentLoginState})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Current Login Satus is $currentLoginState"),
+          ),
+        );
+      },
+      child: Text("Check Login Status"),
     );
   }
 }
