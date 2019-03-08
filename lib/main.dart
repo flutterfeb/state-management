@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/double_counter_screen.dart';
+import 'package:state_management/inherited_counter.dart';
 import 'package:state_management/model/login_state_button.dart';
 import 'package:state_management/model/login_state_enum.dart';
 
@@ -38,23 +39,25 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            LoginStateButton(
-                loginState: _loginState,
-                changeLoginState: (LoginState newLoginState) {
-                  _loginState = newLoginState;
-                  setState(() {});
-                }),
-            DoubleCounterScreen(
-              counter: _counter,
-              incrementFunction: increment,
-              decrementFunction: decrement,
-            ),
-            CheckStatusButton(currentLoginState: _loginState),
-          ],
+      home: InheritedCounter(
+        counter: _counter,
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              LoginStateButton(
+                  loginState: _loginState,
+                  changeLoginState: (LoginState newLoginState) {
+                    _loginState = newLoginState;
+                    setState(() {});
+                  }),
+              DoubleCounterScreen(
+                incrementFunction: increment,
+                decrementFunction: decrement,
+              ),
+              CheckStatusButton(currentLoginState: _loginState),
+            ],
+          ),
         ),
       ),
     );
