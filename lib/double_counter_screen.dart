@@ -13,18 +13,15 @@ class DoubleCounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: CounterText(counter: counter, onPressed: incrementFunction,),
-          ),
-          Expanded(
-            child: CounterText(counter: counter, onPressed: decrementFunction,),
-          ),
-        ],
-      ),
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: CounterText(counter: counter, onPressed: incrementFunction, isIncrementor: true,),
+        ),
+        Expanded(
+          child: CounterText(counter: counter, onPressed: decrementFunction,isIncrementor: false,),
+        ),
+      ],
     );
   }
 }

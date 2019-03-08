@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CounterText extends StatefulWidget {
   final Function onPressed;
   final int counter;
+  final bool isIncrementor;
 
-  const CounterText({Key key, this.onPressed, @required this.counter})
+  const CounterText({Key key, this.onPressed, @required this.counter, @required this.isIncrementor})
       : super(key: key);
 
   @override
@@ -20,6 +21,8 @@ class _CounterTextState extends State<CounterText>
   Function get onPressed => widget.onPressed;
 
   Animation<double> textSizeAnimation;
+
+  bool get isIncrementor => widget.isIncrementor;
 
   @override
   void initState() {
@@ -41,10 +44,13 @@ class _CounterTextState extends State<CounterText>
     controller.forward();
   }
 
+  Color get raisedButtonColor => isIncrementor ? Colors.green : Colors.red;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: RaisedButton(
+        color: raisedButtonColor,
         onPressed: onPressed,
         child: Text(
           counter,
